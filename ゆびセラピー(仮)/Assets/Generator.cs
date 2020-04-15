@@ -21,10 +21,59 @@ public class Generator : MonoBehaviour {
     int numOfSizeL = 0;
     int numOfSpike = 0;
 
+    GameObject touch;
+
     // Use this for initialization
     void Start () {
 		
 	}
+
+    public Vector3 GetTouchDirection(Vector3 position)
+    {
+        Vector3 direction = touch.transform.position - position;
+        return direction.normalized;
+    }
+
+    public bool IsInTouchRadius(Vector3 position)
+    {
+        if (touch == null)
+        {
+            return false;
+        }
+
+        touch tc = (touch)touch.GetComponent(typeof(touch));
+
+        return tc.IsInRadius(position);
+    }
+
+    public Vector3 GetTouchPosition()
+    {
+        if (touch == null)
+        {
+            return new Vector3(0.0f, 0.0f, 0.0f );
+        }
+
+        Transform trans = touch.GetComponent<Transform>();
+        return trans.position;
+    }
+
+    public float GetTouchInfrationLevel()
+    {
+        if( touch == null)
+        {
+            return 0;
+        }
+
+        touch tc = (touch)touch.GetComponent( typeof(touch) );
+
+        return tc.GetInfrationLevel();
+    }
+    
+    // called when touch object is going to be destroyed.
+    public void touchDestroy()
+    {
+        touch = null;
+    }
 
     void addAnySize( GameObject anySize )
     {
@@ -37,6 +86,10 @@ public class Generator : MonoBehaviour {
         location.z = 0;
 
         GameObject newObject = (GameObject)Instantiate( anySize, location, Quaternion.identity);
+
+        IgeneratorRef iGen = (IgeneratorRef)newObject.GetComponent(typeof(IgeneratorRef));
+        iGen.SetGenerator(this);
+
     }
 
     void addSizeS()
@@ -99,7 +152,9 @@ public class Generator : MonoBehaviour {
     {
         if(Input.GetButtonDown( "Fire1" ))
         {
-            GameObject newObject = (GameObject)Instantiate(touch_prefab, transform.position, Quaternion.identity);
+            touch = (GameObject)Instantiate(touch_prefab, transform.position, Quaternion.identity);
+            IgeneratorRef tc = (IgeneratorRef)touch.GetComponent(typeof(IgeneratorRef));
+            tc.SetGenerator(this);
 
         }
     }

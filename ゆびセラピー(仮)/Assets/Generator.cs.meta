@@ -3,7 +3,17 @@ guid: ed67345c9048d90439bf1e4564a46d87
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - size_s_prefab: {fileID: 1438725578461442, guid: 355f7327525062a43bdffa25f3c9190b,
+      type: 2}
+  - size_m_prefab: {fileID: 1820330903197422, guid: bc0b795a6e515e34c9314091389826d1,
+      type: 2}
+  - size_l_prefab: {fileID: 1648468910141006, guid: dff1b097a598e994bbcf718501137d8a,
+      type: 2}
+  - spike_prefab: {fileID: 1753113796972132, guid: cd2bbb716cbb23440a82071e3a9c2e7e,
+      type: 2}
+  - touch_prefab: {fileID: 1564734837123546, guid: 7ff92de61bbbda94eb1b1010f2defb53,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
